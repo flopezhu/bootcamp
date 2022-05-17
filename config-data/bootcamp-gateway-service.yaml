@@ -1,0 +1,21 @@
+server:
+  port: 8080
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8099/eureka/
+spring:
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+      routes:
+        - id: api-rest-springboot-bootcamp
+          uri: lb://api-rest-springboot-bootcamp
+          predicates:
+            - Path=/api/customers**
+        - id: api-rest-springboot-bootcamp-products
+          uri: lb://api-rest-springboot-bootcamp-products
+          predicates:
+            - Path=/api/products/**

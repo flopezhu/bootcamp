@@ -1,0 +1,57 @@
+{
+	"info": {
+		"_postman_id": "95998886-341c-4b4a-b22c-be3ef3ee8386",
+		"name": "Config-Server",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Configuration",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://root:admin@localhost:8888/customer-service/default",
+					"protocol": "http",
+					"auth": {
+						"user": "root",
+						"password": "admin"
+					},
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"customer-service",
+						"default"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Configuration Copy",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://root:admin@localhost:8888/customer-service/default",
+					"protocol": "http",
+					"auth": {
+						"user": "root",
+						"password": "admin"
+					},
+					"host": [
+						"localhost"
+					],
+					"port": "8888",
+					"path": [
+						"customer-service",
+						"default"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

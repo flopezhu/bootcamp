@@ -1,0 +1,147 @@
+{
+	"info": {
+		"_postman_id": "1089eb14-5499-41f5-a99a-c2158b88c6c5",
+		"name": "CUSTOMERS",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "getAllCustomers",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8084/api/customers",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8084",
+					"path": [
+						"api",
+						"customers"
+					],
+					"query": [
+						{
+							"key": "",
+							"value": null,
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getCutomerForId",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8084/api/customers/6282b89e3d02b213dbd6fa42",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8084",
+					"path": [
+						"api",
+						"customers",
+						"6282b89e3d02b213dbd6fa42"
+					],
+					"query": [
+						{
+							"key": "",
+							"value": null,
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "createCustomer",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"code\": \"LOREM123\",\r\n    \"name\": \"Lorena\",\r\n    \"lastName\": \"Lopez Huayanay\",\r\n    \"sex\": \"Mujer\",\r\n    \"dateBirth\": \"2022-05-12T02:52:29.367+00:00\",\r\n    \"documentType\": \"DNI\",\r\n    \"documentNumber\": \"70211847\",\r\n    \"address\": \"av lima 123\",\r\n    \"phone\": \"985613414\",\r\n    \"email\": \"\",\r\n    \"customerTypeList\": [\r\n        {\r\n            \"id\": \"627c766d3ef89d10980a0849\",\r\n            \"code\": \"0101\",\r\n            \"customerType\": \"Empresa\",\r\n            \"description\": \"Cliente empresarial\"\r\n        }\r\n    ],\r\n    \"productList\": [\r\n        {\r\n             \"id\": \"627c766d3ef89d10980a0849\",\r\n            \"code\": \"bcp12\",\r\n            \"signedDate\": \"2022-05-12T02:52:29.367+00:00\",\r\n            \"productType\" : \"Cuenta bancaria\",\r\n            \"productName\": \"Cuenta de Ahorro\",\r\n            \"status\": \"active\"\r\n        },\r\n        {\r\n             \"id\": \"627c766d3ef89d10980a0849\",\r\n            \"code\": \"bcp12\",\r\n            \"signedDate\": \"2022-05-12T02:52:29.367+00:00\",\r\n            \"productType\" : \"Cuenta Empresarial\",\r\n            \"productName\": \"Cuenta corriente\",\r\n            \"status\": \"active\"\r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8084/api/customers/create",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8084",
+					"path": [
+						"api",
+						"customers",
+						"create"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "updateCustomer",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"code\": \"LOREM123\",\r\n    \"name\": \"Mongaaa prueba de actualización\",\r\n    \"lastName\": \"Lopez Huayanay\",\r\n    \"sex\": \"Mujer\",\r\n    \"dateBirth\": \"2022-05-12T02:52:29.367+00:00\",\r\n    \"documentType\": \"DNI\",\r\n    \"documentNumber\": \"70211847\",\r\n    \"address\": \"av lima 123\",\r\n    \"phone\": \"985613414\",\r\n    \"email\": \"franclinlh@gmail.com\",\r\n    \"customerTypeList\": [\r\n        {\r\n            \"id\": \"627c766d3ef89d10980a0849\",\r\n            \"code\": \"0101\",\r\n            \"customerType\": \"Empresa\",\r\n            \"description\": \"Cliente empresarial\"\r\n        }\r\n    ],\r\n    \"productList\": [\r\n        {\r\n            \"id\": \"627c766d3ef89d10980a0849\",\r\n            \"code\": \"bcp12\",\r\n            \"signedDate\": \"2022-05-12T02:52:29.367+00:00\",\r\n            \"productType\" : \"Cuenta bancaria\",\r\n            \"productName\": \"Cuenta de Ahorro\",\r\n            \"status\": \"inactive\"\r\n        },\r\n        {\r\n            \"id\": \"627c766d3ef89d10980a0849\",\r\n            \"code\": \"bcp12\",\r\n            \"signedDate\": \"2022-05-12T02:52:29.367+00:00\",\r\n            \"productType\" : \"Crédito\",\r\n            \"productName\": \"Credito Personal\",\r\n            \"status\": \"inactive\"\r\n        }\r\n    ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8084/api/customers/update/6282b89e3d02b213dbd6fa42",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8084",
+					"path": [
+						"api",
+						"customers",
+						"update",
+						"6282b89e3d02b213dbd6fa42"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "deleteCustomer",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/customers/delete/627d7ab2141407584c2a4357",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"customers",
+						"delete",
+						"627d7ab2141407584c2a4357"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

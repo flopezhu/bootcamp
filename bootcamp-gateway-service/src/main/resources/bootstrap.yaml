@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: bootcamp-gateway-service
+  cloud:
+    config:
+      uri: http://localhost:8888
+      username: root
+      password: admin
+      enabled: true
+debug: false

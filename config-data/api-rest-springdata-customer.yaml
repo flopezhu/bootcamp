@@ -1,0 +1,6 @@
+server:
+  port: 8084
+spring:
+  data:
+    mongodb:
+      uri: mongodb+srv://admin:admin@cluster0.oksp7.mongodb.net/springdata-customer?retryWrites=true&w=majority

@@ -1,0 +1,12 @@
+spring:
+  application:
+    name: api-rest-springboot-bootcamp
+  cloud:
+    config:
+      uri: http://localhost:8888
+      username: root
+      password: admin
+      enabled: true
+debug: false
+
+
