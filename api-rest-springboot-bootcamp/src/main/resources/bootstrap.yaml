@@ -9,4 +9,3 @@ spring:
       enabled: true
 debug: false
 
-

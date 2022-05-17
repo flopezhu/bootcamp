@@ -3,7 +3,7 @@ spring:
     config:
       server:
         git:
-          uri: https://github.com/flopezhu/springboot-bootcamp.git
+          uri: https://github.com/flopezhu/bootcamp.git
           search-paths: config-data
           username: ${GIT_USER}
           password: ${GIT_PASSWORD}

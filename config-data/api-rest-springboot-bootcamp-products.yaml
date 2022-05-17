@@ -1,6 +1,21 @@
+#port
 server:
   port: 8082
+
+#mongodb
 spring:
   data:
     mongodb:
-      uri: mongodb+srv://admin:admin@cluster0.oksp7.mongodb.net/bootcamp-product?retryWrites=true&w=majority
+      uri: mongodb+srv://admin:admin@cluster0.oksp7.mongodb.net/bootcamp_products?retryWrites=true&w=majority
+
+#eureka
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+
+#test
+management:
+  cloudfoundry:
+    enabled: 
+
