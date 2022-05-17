@@ -1,11 +1,10 @@
-server:
-  port: 8099
-
-eureka:
-  instance:
-    hostname: localhost
-  client:
-    register-with-eureka: false
-    fetch-registry: false
-    service-url:
-      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
+spring:
+  application:
+    name: api-rest-springboot-bootcamp
+  cloud:
+    config:
+      uri: http://localhost:8888
+      username: root
+      password: admin
+      enabled: true
+debug: false
