@@ -1,6 +1,6 @@
 spring:
   application:
-    name: api-rest-springboot-bootcamp
+    name: bootcamp-registry-service
   cloud:
     config:
       uri: http://localhost:8888
