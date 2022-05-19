@@ -14,7 +14,7 @@ spring:
         - id: bootcamp-customer-service
           uri: lb://BOOTCAMP-CUSTOMER-SERVICE
           predicates:
-            - Path=/api/customers**
+            - Path=/api/customers/**
         - id: bootcamp-product-service
           uri: lb://BOOTCAMP-PRODUCT-SERVICE
           predicates:
