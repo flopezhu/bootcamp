@@ -3,7 +3,7 @@ server:
 eureka:
   client:
     service-url:
-      defaultZone: http://localhost:8099/eureka/
+      defaultZone: http://localhost:8761/eureka/
 spring:
   cloud:
     gateway:
@@ -11,11 +11,28 @@ spring:
         locator:
           enabled: true
       routes:
-        - id: api-rest-springboot-bootcamp
-          uri: lb://api-rest-springboot-bootcamp
+        - id: bootcamp-customer-service
+          uri: lb://BOOTCAMP-CUSTOMER-SERVICE
           predicates:
             - Path=/api/customers**
-        - id: api-rest-springboot-bootcamp-products
-          uri: lb://api-rest-springboot-bootcamp-products
+        - id: bootcamp-product-service
+          uri: lb://BOOTCAMP-PRODUCT-SERVICE
           predicates:
             - Path=/api/products/**
+        - id: bootcamp-bankaccount-service
+          uri: lb://BOOTCAMP-BANKACCOUNT-SERVICE
+          predicates:
+            - Path=/api/bankAccount/**
+        - id: bootcamp-credit-service
+          uri: lb://BOOTCAMP-CREDIT-SERVICE
+          predicates:
+            - Path=/api/credit/**
+        - id: bootcamp-customertype-service
+          uri: lb://BOOTCAMP-CUSTOMERTYPE-SERVICE
+          predicates:
+            - Path=/api/customerType/**
+        - id: bootcamp-payment-service
+          uri: lb://BOOTCAMP-PAYMENT-SERVICE
+          predicates:
+            - Path=/api/payments/**
+        
