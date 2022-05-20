@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/api-rest-springboot-bootcamp/api-rest-springboot-bootcamp.iml" filepath="$PROJECT_DIR$/api-rest-springboot-bootcamp/api-rest-springboot-bootcamp.iml" />
+      <module fileurl="file://$PROJECT_DIR$/api-rest-springboot-bootcamp-products/api-rest-springboot-bootcamp-products.iml" filepath="$PROJECT_DIR$/api-rest-springboot-bootcamp-products/api-rest-springboot-bootcamp-products.iml" />
+      <module fileurl="file://$PROJECT_DIR$/api-rest-springdata-customer/api-rest-springdata-customer.iml" filepath="$PROJECT_DIR$/api-rest-springdata-customer/api-rest-springdata-customer.iml" />
+      <module fileurl="file://$PROJECT_DIR$/bootcamp-bankaccount-service/bootcamp-bankaccount-service.iml" filepath="$PROJECT_DIR$/bootcamp-bankaccount-service/bootcamp-bankaccount-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/bootcamp-config-server/bootcamp-config-server.iml" filepath="$PROJECT_DIR$/bootcamp-config-server/bootcamp-config-server.iml" />
+      <module fileurl="file://$PROJECT_DIR$/bootcamp-credit-service/bootcamp-credit-service.iml" filepath="$PROJECT_DIR$/bootcamp-credit-service/bootcamp-credit-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/bootcamp-customer-service/bootcamp-customer-service.iml" filepath="$PROJECT_DIR$/bootcamp-customer-service/bootcamp-customer-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/bootcamp-customertype-service/bootcamp-customertype-service.iml" filepath="$PROJECT_DIR$/bootcamp-customertype-service/bootcamp-customertype-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/bootcamp-payment-service/bootcamp-payment-service.iml" filepath="$PROJECT_DIR$/bootcamp-payment-service/bootcamp-payment-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/bootcamp-product-service/bootcamp-product-service.iml" filepath="$PROJECT_DIR$/bootcamp-product-service/bootcamp-product-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/bootcamp-registry-service/bootcamp-registry-service.iml" filepath="$PROJECT_DIR$/bootcamp-registry-service/bootcamp-registry-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/bootcamp-gateway-service/gateway-service.iml" filepath="$PROJECT_DIR$/bootcamp-gateway-service/gateway-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/spring webflux.iml" filepath="$PROJECT_DIR$/.idea/spring webflux.iml" />
+    </modules>
+  </component>
+</project>

@@ -9,6 +9,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
 @RestController
 @RequestMapping(value = "/api/customerType")
 public class CustomerTypeController {
@@ -23,7 +25,7 @@ public class CustomerTypeController {
     }
 
     @PostMapping(value = "/create")
-    public ResponseEntity<CustomerTypeDto> createNewCustomer(@RequestBody CustomerTypeDto customerDto) {
+    public ResponseEntity<CustomerTypeDto> createNewCustomer(@Valid @RequestBody CustomerTypeDto customerDto) {
         return new ResponseEntity<>(this.customerTypeService.createNewCustomerType(customerDto), HttpStatus.CREATED);
     }
     @PutMapping(value = "/update/{id}")

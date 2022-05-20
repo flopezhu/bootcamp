@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/api-rest-springboot-bootcamp-products/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/api-rest-springboot-bootcamp-products/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/api-rest-springboot-bootcamp/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/api-rest-springboot-bootcamp/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/api-rest-springdata-customer/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/api-rest-springdata-customer/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/bootcamp-bankaccount-service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/bootcamp-bankaccount-service/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/bootcamp-config-server/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/bootcamp-config-server/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/bootcamp-credit-service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/bootcamp-credit-service/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/bootcamp-customer-service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/bootcamp-customer-service/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/bootcamp-customertype-service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/bootcamp-customertype-service/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/bootcamp-gateway-service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/bootcamp-gateway-service/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/bootcamp-payment-service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/bootcamp-payment-service/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/bootcamp-product-service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/bootcamp-product-service/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/bootcamp-registry-service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/bootcamp-registry-service/src/main/resources" charset="UTF-8" />
+  </component>
+</project>

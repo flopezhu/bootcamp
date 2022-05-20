@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="bootcamp-customertype-service" />
+        <module name="api-rest-springboot-bootcamp-products" />
+        <module name="bootcamp-bankaccount-service" />
+        <module name="bootcamp-registry-service" />
+        <module name="bootcamp-config-server" />
+        <module name="gateway-service" />
+        <module name="bootcamp-product-service" />
+        <module name="api-rest-springdata-customer" />
+        <module name="bootcamp-customer-service" />
+        <module name="api-rest-springboot-bootcamp" />
+        <module name="bootcamp-credit-service" />
+        <module name="bootcamp-payment-service" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="api-rest-springboot-bootcamp" target="11" />
+      <module name="api-rest-springboot-bootcamp-products" target="11" />
+      <module name="api-rest-springdata-customer" target="11" />
+      <module name="bootcamp-bankaccount-service" target="11" />
+      <module name="bootcamp-config-server" target="11" />
+      <module name="bootcamp-credit-service" target="11" />
+      <module name="bootcamp-customer-service" target="11" />
+      <module name="bootcamp-customertype-service" target="11" />
+      <module name="bootcamp-payment-service" target="11" />
+      <module name="bootcamp-product-service" target="11" />
+      <module name="bootcamp-registry-service" target="11" />
+      <module name="gateway-service" target="11" />
+    </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="api-rest-springboot-bootcamp" options="-parameters" />
+      <module name="api-rest-springboot-bootcamp-products" options="-parameters" />
+      <module name="api-rest-springdata-customer" options="-parameters" />
+      <module name="bootcamp-bankaccount-service" options="-parameters" />
+      <module name="bootcamp-config-server" options="-parameters" />
+      <module name="bootcamp-credit-service" options="-parameters" />
+      <module name="bootcamp-customer-service" options="-parameters" />
+      <module name="bootcamp-customertype-service" options="-parameters" />
+      <module name="bootcamp-payment-service" options="-parameters" />
+      <module name="bootcamp-product-service" options="-parameters" />
+      <module name="bootcamp-registry-service" options="-parameters" />
+      <module name="gateway-service" options="-parameters" />
+    </option>
+  </component>
+</project>

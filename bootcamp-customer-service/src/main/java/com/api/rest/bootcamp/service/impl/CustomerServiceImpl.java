@@ -1,5 +1,6 @@
 package com.api.rest.bootcamp.service.impl;
 
+import com.api.rest.bootcamp.document.Customer;
 import com.api.rest.bootcamp.document.error.CustomerNotFoundException;
 import com.api.rest.bootcamp.dto.CustomerDto;
 import com.api.rest.bootcamp.repository.CustomerDao;
@@ -11,6 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
+
+import java.util.List;
 
 @Service
 public class CustomerServiceImpl implements CustomerService {
@@ -31,6 +34,7 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public Mono<CustomerDto> save(Mono<CustomerDto> customer) {
+        log.info("create a new customer", customer);
         return customer.map(AppUtils::dtoToEntities)
                 .flatMap(customerDAO::insert)
                 .map(AppUtils::entityToDto);
@@ -38,6 +42,7 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public Mono<CustomerDto> updateCustomer(Mono<CustomerDto> customerDtoMono, String id) {
+        log.info("update a customer for id s%", id, customerDtoMono);
         return customerDAO.findById(id)
                 .flatMap(customer -> customerDtoMono.map(AppUtils::dtoToEntities))
                 .doOnNext(next -> next.setId(id))

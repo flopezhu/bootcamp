@@ -22,5 +22,6 @@ public class CustomerDto {
     private String email;
     private String customerId;
     private String ProductId;
+    private String bankAccountId;
     private Date createdDate;
 }

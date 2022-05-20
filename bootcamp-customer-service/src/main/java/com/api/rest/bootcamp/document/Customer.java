@@ -40,8 +40,15 @@ public class Customer {
 
     @NotBlank(message = "email is mandatory")
     private String email;
+
+    @NotBlank(message = "customerId is mandatory")
     private String customerId;
+
+    @NotBlank(message = "ProductId is mandatory")
     private String ProductId;
+
+    @NotBlank(message = "bankAccountId is mandatory")
+    private String bankAccountId;
 
     @JsonFormat(pattern="dd-MM-yyyy hh:mm:ss", timezone="GMT-05:00")
     private Date createdDate = new Date();
