@@ -15,6 +15,9 @@ spring:
           uri: lb://BOOTCAMP-CUSTOMER-SERVICE
           predicates:
             - Path=/api/customers/**
+          filters:
+            - CircuitBreaker=customerTypeInfoService
+            - RewritePath=/api/customers/(?<path>.*), /$\{path}
         - id: bootcamp-product-service
           uri: lb://BOOTCAMP-PRODUCT-SERVICE
           predicates:
