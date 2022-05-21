@@ -21,6 +21,9 @@ management:
     web:
       exposure:
         include: health,info
+  endpoint:
+      health:
+        show-details: always
 
 #por for config server 8888
 server:
