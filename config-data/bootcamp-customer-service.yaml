@@ -14,7 +14,7 @@ eureka:
     service-url:
       defaultZone: http://localhost:8761/eureka/
 
-#circuitBraker 
+#circuitBraker
 resilience4j:
   circuitbreaker:
     instances:
@@ -28,7 +28,7 @@ resilience4j:
         slidingWindowSize: 10
         waitDurationInOpenState: 5s
         slidingWindowType: COUNT_BASED
-        timeoutDuration: 2s
+        #timeoutDuration: 2s
       productInfoService:
         registerHealthIndicator: true
         eventConsumerBufferSize: 10
@@ -39,7 +39,7 @@ resilience4j:
         slidingWindowSize: 10
         waitDurationInOpenState: 5s
         slidingWindowType: COUNT_BASED
-        timeoutDuration: 2s
+        #timeoutDuration: 2s
 management:
   health:
     circuitbreakers:
@@ -51,5 +51,4 @@ management:
   endpoint:
     health:
       show-details: always
- 
 
