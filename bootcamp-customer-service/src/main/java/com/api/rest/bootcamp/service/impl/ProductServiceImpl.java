@@ -13,12 +13,12 @@ import reactor.core.publisher.Mono;
 
 @Service
 public class ProductServiceImpl implements ProductService {
-    //private static final String PRODUCT_TYPE_INFO_SERVICE = "productInfoService";
+    private static final String PRODUCT_TYPE_INFO_SERVICE = "productInfoService";
     @Autowired
     private WebClient webClient;
 
     @Override
-    //@CircuitBreaker(name = PRODUCT_TYPE_INFO_SERVICE, fallbackMethod = "productInfoFallback")
+    @CircuitBreaker(name = PRODUCT_TYPE_INFO_SERVICE, fallbackMethod = "productInfoFallback")
     public Mono<ProductDto> getProductForId(String id) {
         return webClient.get()
                 .uri("/api/products/" + id)
