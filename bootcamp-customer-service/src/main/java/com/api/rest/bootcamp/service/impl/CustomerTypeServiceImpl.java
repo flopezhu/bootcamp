@@ -3,6 +3,8 @@ package com.api.rest.bootcamp.service.impl;
 import com.api.rest.bootcamp.dto.CustomerTypeDto;
 import com.api.rest.bootcamp.service.CustomerTypeService;
 import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,7 +19,7 @@ public class CustomerTypeServiceImpl implements CustomerTypeService {
     private WebClient webClient;
 
     @Override
-    @CircuitBreaker(name = CUSTOMER_TYPE_INFO_SERVICE, fallbackMethod = "customerTypeInfoFallback")
+    //@CircuitBreaker(name = CUSTOMER_TYPE_INFO_SERVICE, fallbackMethod = "customerTypeInfoFallback")
     public Mono<CustomerTypeDto> getCustomerTypeForId(String id) {
         return webClient.get()
                 .uri("/api/customerType/" + id)

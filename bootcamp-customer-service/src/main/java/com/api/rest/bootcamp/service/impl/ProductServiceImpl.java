@@ -18,7 +18,7 @@ public class ProductServiceImpl implements ProductService {
     private WebClient webClient;
 
     @Override
-    @CircuitBreaker(name = PRODUCT_TYPE_INFO_SERVICE, fallbackMethod = "productInfoFallback")
+    //@CircuitBreaker(name = PRODUCT_TYPE_INFO_SERVICE, fallbackMethod = "productInfoFallback")
     public Mono<ProductDto> getProductForId(String id) {
         return webClient.get()
                 .uri("/api/products/" + id)

@@ -5,6 +5,7 @@ import com.api.rest.bootcamp.document.error.CustomerNotFoundException;
 import com.api.rest.bootcamp.dto.CustomerDto;
 import com.api.rest.bootcamp.repository.CustomerDao;
 import com.api.rest.bootcamp.service.CustomerService;
+import com.api.rest.bootcamp.service.CustomerTypeService;
 import com.api.rest.bootcamp.util.AppUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,9 +22,12 @@ public class CustomerServiceImpl implements CustomerService {
     @Autowired
     private CustomerDao customerDAO;
 
+    @Autowired
+    private CustomerTypeService customerTypeService;
+
     @Override
     public Flux<CustomerDto> findAll() {
-        log.info("TEST");
+        log.info("TEST" + customerTypeService.getCustomerTypeForId("6288814a42357773d0e470c7"));
         return customerDAO.findAll().map(AppUtils::entityToDto);
     }
 
