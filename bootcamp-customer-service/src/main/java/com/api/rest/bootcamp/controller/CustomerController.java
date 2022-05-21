@@ -6,7 +6,9 @@ import com.api.rest.bootcamp.dto.ProductDto;
 import com.api.rest.bootcamp.service.CustomerService;
 import com.api.rest.bootcamp.service.CustomerTypeService;
 import com.api.rest.bootcamp.service.ProductService;
+import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -27,6 +29,8 @@ public class CustomerController {
 
     @Autowired
     private ProductService productService;
+
+    private static final String PRODUCT_TYPE_INFO_SERVICE = "productInfoService";
 
 
    /* @PostMapping("/register")
@@ -65,6 +69,7 @@ public class CustomerController {
     }
 
     @GetMapping("/testP/{id}")
+    @CircuitBreaker(name = PRODUCT_TYPE_INFO_SERVICE, fallbackMethod = "productInfoFallback")
     public  Mono<ResponseEntity<ProductDto>> getProductById(@PathVariable(name = "id") String id) {
         return productService.getProductForId(id).map(productDto -> ResponseEntity.ok().contentType(MediaType.APPLICATION_JSON).body(productDto));
     }
@@ -95,5 +100,9 @@ public class CustomerController {
     @DeleteMapping("/delete/{id}")
     public Mono<ResponseEntity<String>> deleteCustomer(@PathVariable(name = "id") String id) {
         return customerService.deleteById(id).map(customerDto -> ResponseEntity.ok().contentType(MediaType.APPLICATION_JSON).body(customerDto));
+    }
+
+    public ResponseEntity<String> productInfoFallback(Exception e) {
+        return new ResponseEntity<String>("GET: Product info endpoint is not available right now.", HttpStatus.OK);
     }
 }

@@ -1,10 +1,61 @@
+#spring:
+#  application:
+#    name: bootcamp-gateway-service
+#  cloud:
+#    config:
+#      uri: http://localhost:8888
+#      username: root
+#      password: admin
+#      enabled: true
+#debug: false
+
+server:
+  port: 8000
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
 spring:
-  application:
-    name: bootcamp-gateway-service
   cloud:
-    config:
-      uri: http://localhost:8888
-      username: root
-      password: admin
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+      routes:
+        - id: bootcamp-customer-service
+          uri: lb://BOOTCAMP-CUSTOMER-SERVICE
+          predicates:
+            - Path=/api/customers/**
+        - id: bootcamp-product-service
+          uri: lb://BOOTCAMP-PRODUCT-SERVICE
+          predicates:
+            - Path=/api/products/**
+        - id: bootcamp-bankaccount-service
+          uri: lb://BOOTCAMP-BANKACCOUNT-SERVICE
+          predicates:
+            - Path=/api/bankAccount/**
+        - id: bootcamp-credit-service
+          uri: lb://BOOTCAMP-CREDIT-SERVICE
+          predicates:
+            - Path=/api/credit/**
+        - id: bootcamp-customertype-service
+          uri: lb://BOOTCAMP-CUSTOMERTYPE-SERVICE
+          predicates:
+            - Path=/api/customerType/**
+        - id: bootcamp-payment-service
+          uri: lb://BOOTCAMP-PAYMENT-SERVICE
+          predicates:
+            - Path=/api/payments/**
+
+#actuator
+management:
+  health:
+    circuitbreakers:
       enabled: true
-debug: false
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+  endpoint:
+    health:
+      show-details: always
