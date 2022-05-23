@@ -4,10 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8349116f-fec8-47b7-9b0b-56662eaf3133" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/bootcamp-customer-service/src/main/java/com/api/rest/bootcamp/BootcampCustomerServiceApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/bootcamp-customer-service/src/main/java/com/api/rest/bootcamp/BootcampCustomerServiceApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bootcamp-payment-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/bootcamp-payment-service/pom.xml" afterDir="false" />
-    </list>
+    <list default="true" id="8349116f-fec8-47b7-9b0b-56662eaf3133" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -31,14 +28,14 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "C:/Users/flopezhu/Documents/spring webflux"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/flopezhu/Documents/spring webflux&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager" selected="Spring Boot.BootcampBankaccountServiceApplication">
     <configuration name="BootcampBankaccountServiceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
       <module name="bootcamp-bankaccount-service" />
@@ -69,5 +66,16 @@
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
 </project>
