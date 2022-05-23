@@ -1,5 +1,6 @@
 package com.api.rest.bootcamp.controller;
 
+import com.api.rest.bootcamp.document.error.CustomerNotFoundException;
 import com.api.rest.bootcamp.dto.CustomerDto;
 import com.api.rest.bootcamp.dto.CustomerTypeDto;
 import com.api.rest.bootcamp.dto.ProductDto;
@@ -7,20 +8,28 @@ import com.api.rest.bootcamp.service.CustomerService;
 import com.api.rest.bootcamp.service.CustomerTypeService;
 import com.api.rest.bootcamp.service.ProductService;
 import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.support.WebExchangeBindException;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 import javax.validation.Valid;
 import java.net.URI;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/customers")
 public class CustomerController {
+    private static final Logger log = LoggerFactory.getLogger(CustomerController.class);
     @Autowired
     private CustomerService customerService;
 
@@ -30,46 +39,16 @@ public class CustomerController {
     @Autowired
     private ProductService productService;
 
-
-   /* @PostMapping("/register")
-    public Mono<ResponseEntity<Map<String, Object>>> registerCustomer(@RequestBody Mono<CustomerDto> customerMono) {
-        Map<String, Object> response = new HashMap<>();
-        return customerMono.flatMap(customer -> {
-            return customerService.save(customer).map(customerReturn -> {
-                response.put("customer", customerReturn);
-                response.put("message", "Customer saved successful");
-                response.put("timestamp", new Date());
-                return ResponseEntity.created(URI.create("/api/customer".concat(customerReturn.getId())))
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .body(response);
-            });
-        }).onErrorResume(error -> {
-            return Mono.just(error).cast(WebExchangeBindException.class)
-                    .flatMap(errors -> Mono.just(errors.getFieldErrors()))
-                    .flatMapMany(Flux::fromIterable)
-                    .map(fieldError -> "The camp:" + " " + fieldError.getField() + " " + fieldError.getDefaultMessage())
-                    .collectList()
-                    .flatMap(list -> {
-                        response.put("errors", list);
-                        response.put("timestamp", new Date());
-                        response.put("status", HttpStatus.BAD_REQUEST.value());
-                        return Mono.just(ResponseEntity.badRequest().body(response));
-                    });
-        });
-        *//*return customerService.save(customer).map(customers -> ResponseEntity.created(URI.create("/api/customers".concat(customers.getId())))
-                .contentType(MediaType.APPLICATION_JSON)
-                .body(customers));*//*
-    }*/
-
     @GetMapping("/test/{id}")
-    public  Mono<ResponseEntity<CustomerTypeDto>> getCustomerTypeById(@PathVariable(name = "id") String id) {
+    public Mono<ResponseEntity<CustomerTypeDto>> getCustomerTypeById(@PathVariable(name = "id") String id) {
         return customerTypeService.getCustomerTypeForId(id).map(customerTypeDto -> ResponseEntity.ok().contentType(MediaType.APPLICATION_JSON).body(customerTypeDto));
     }
 
     @GetMapping("/testP/{id}")
-    public  Mono<ResponseEntity<ProductDto>> getProductById(@PathVariable(name = "id") String id) {
+    public Mono<ResponseEntity<ProductDto>> getProductById(@PathVariable(name = "id") String id) {
         return productService.getProductForId(id).map(productDto -> ResponseEntity.ok().contentType(MediaType.APPLICATION_JSON).body(productDto));
     }
+
     @PostMapping("/register")
     public Mono<ResponseEntity<CustomerDto>> saveCustomer(@Valid @RequestBody Mono<CustomerDto> customerDtoMono) {
         return customerService.save(customerDtoMono).map(customerDto -> ResponseEntity.created(URI.create("/api/customers/".concat(customerDto.getId())))

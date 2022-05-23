@@ -3,6 +3,7 @@ package com.api.rest.bootcamp.service.impl;
 import com.api.rest.bootcamp.document.Customer;
 import com.api.rest.bootcamp.document.error.CustomerNotFoundException;
 import com.api.rest.bootcamp.dto.CustomerDto;
+import com.api.rest.bootcamp.dto.CustomerTypeDto;
 import com.api.rest.bootcamp.repository.CustomerDao;
 import com.api.rest.bootcamp.service.CustomerService;
 import com.api.rest.bootcamp.service.CustomerTypeService;
@@ -14,7 +15,10 @@ import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 
 @Service
 public class CustomerServiceImpl implements CustomerService {
@@ -27,7 +31,6 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public Flux<CustomerDto> findAll() {
-        log.info("TEST" + customerTypeService.getCustomerTypeForId("6288814a42357773d0e470c7"));
         return customerDAO.findAll().map(AppUtils::entityToDto);
     }
 
@@ -38,15 +41,14 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public Mono<CustomerDto> save(Mono<CustomerDto> customer) {
-        log.info("create a new customer", customer);
         return customer.map(AppUtils::dtoToEntities)
                 .flatMap(customerDAO::insert)
-                .map(AppUtils::entityToDto);
+                .map(AppUtils::entityToDto)
+                .switchIfEmpty(Mono.error(() -> new CustomerNotFoundException("error")));
     }
 
     @Override
     public Mono<CustomerDto> updateCustomer(Mono<CustomerDto> customerDtoMono, String id) {
-        log.info("update a customer for id s%", id, customerDtoMono);
         return customerDAO.findById(id)
                 .flatMap(customer -> customerDtoMono.map(AppUtils::dtoToEntities))
                 .doOnNext(next -> next.setId(id))
@@ -59,6 +61,5 @@ public class CustomerServiceImpl implements CustomerService {
     public Mono<String> deleteById(String id) {
         return customerDAO.findById(id).flatMap(customer -> this.customerDAO.deleteById(customer.getId())
                 .thenReturn("Customer has deleted")).switchIfEmpty(Mono.error(() -> new CustomerNotFoundException(id)));
-        //return customerDAO.deleteById(id).switchIfEmpty(Mono.error(() -> new CustomerNotFoundException(id)));
     }
 }

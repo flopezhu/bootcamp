@@ -13,20 +13,14 @@ import reactor.core.publisher.Mono;
 
 @Service
 public class ProductServiceImpl implements ProductService {
-    private static final String PRODUCT_TYPE_INFO_SERVICE = "productInfoService";
     @Autowired
     private WebClient webClient;
 
     @Override
-    //@CircuitBreaker(name = PRODUCT_TYPE_INFO_SERVICE, fallbackMethod = "productInfoFallback")
     public Mono<ProductDto> getProductForId(String id) {
         return webClient.get()
                 .uri("/api/products/" + id)
                 .retrieve()
                 .bodyToMono(ProductDto.class);
-    }
-
-    public ResponseEntity<String> productInfoFallback(Exception e) {
-        return new ResponseEntity<String>("GET: Product info endpoint is not available right now.", HttpStatus.OK);
     }
 }

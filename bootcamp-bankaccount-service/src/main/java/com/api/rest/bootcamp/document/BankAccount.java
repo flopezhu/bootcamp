@@ -17,25 +17,11 @@ import java.util.Date;
 public class BankAccount {
     @Id
     private String id;
-
-    @NotBlank(message = "customerId is mandatory")
     private String customerId;
-
-    @NotBlank(message = "productId is mandatory")
     private String productId;
-
-    @NotBlank(message = "accountNumber is mandatory")
     private String accountNumber;
-
-    @NotBlank(message = "currency is mandatory")
     private String currency;
-
-    @Value("${some.key:0.00}")
     private String amountAvailable;
-
-    @Value("${some.key:0.00}")
     private String countableBalance;
-
-    @JsonFormat(pattern="dd-MM-yyyy hh:mm:ss", timezone="GMT-05:00")
     private Date creationDate;
 }
