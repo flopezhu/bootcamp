@@ -35,3 +35,14 @@ spring:
           uri: lb://BOOTCAMP-PAYMENT-SERVICE
           predicates:
             - Path=/api/payments/**
+management:
+  health:
+    circuitbreakers:
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: health
+  endpoint:
+    health:
+      show-details: always
