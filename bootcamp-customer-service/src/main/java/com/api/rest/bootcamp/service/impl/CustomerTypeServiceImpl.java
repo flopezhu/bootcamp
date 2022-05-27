@@ -21,21 +21,24 @@ import java.util.List;
 @Service
 @Getter
 public class CustomerTypeServiceImpl implements CustomerTypeService {
+    /**
+     * web client.
+     */
     @Autowired
     private  WebClient webClient;
 
-    private ReactiveCircuitBreakerFactory reactiveCircuitBreakerFactory;
+    //private ReactiveCircuitBreakerFactory reactiveCircuitBreakerFactory;
 
+    /**
+     * @param id
+     * @return consume the customerType microservice and get
+     * a customerType by id.
+     */
     @Override
-    public Mono<CustomerTypeDto> getCustomerTypeForId(String id) {
+    public Mono<CustomerTypeDto> getCustomerTypeForId(final String id) {
         return webClient.get()
                 .uri("/api/customerType/" + id)
                 .retrieve()
-                .bodyToMono(CustomerTypeDto.class)
-                .timeout(Duration.ofMillis(20_000))
-                .transform(it -> {
-                    ReactiveCircuitBreaker rcb = this.reactiveCircuitBreakerFactory.create("customerTypeInfoService");
-                    return rcb.run(it, throwable -> Mono.just(CustomerTypeDto.builder().build()));
-                });
+                .bodyToMono(CustomerTypeDto.class);
     }
 }

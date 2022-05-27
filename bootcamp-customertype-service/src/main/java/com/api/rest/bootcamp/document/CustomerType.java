@@ -16,14 +16,21 @@ import javax.validation.constraints.NotBlank;
 @NoArgsConstructor
 @Document(collection = "customerType")
 public class CustomerType {
+    /**
+     * customer type id.
+     */
     @Id
     private String id;
-
-    @NotBlank(message = "code is mandatory")
-    @Indexed(unique=true)
+    /**
+     * customer type code.
+     */
     private String code;
-
-    @NotBlank(message = "customerType is mandatory")
+    /**
+     * customer type.
+     */
     private String customerType;
+    /**
+     * customer type description.
+     */
     private String description;
 }

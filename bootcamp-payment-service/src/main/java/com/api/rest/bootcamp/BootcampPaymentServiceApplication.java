@@ -7,8 +7,10 @@ import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 @SpringBootApplication
 @EnableEurekaClient
 public class BootcampPaymentServiceApplication {
-
-    public static void main(String[] args) {
+    /**
+     * @param args
+     */
+    public static void main(final String[] args) {
         SpringApplication.run(BootcampPaymentServiceApplication.class, args);
     }
 

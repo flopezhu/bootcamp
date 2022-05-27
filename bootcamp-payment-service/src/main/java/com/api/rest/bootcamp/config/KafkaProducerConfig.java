@@ -4,6 +4,9 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class KafkaProducerConfig {
+    /**
+     * localhost test.
+     */
     private final String bootstrapAddress = "localhost:9092";
 
     /*@Bean

@@ -9,21 +9,49 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 
 @ControllerAdvice
 public class ApplicationErrorHandler {
+    /**
+     * not found exception.
+     */
+    private static final int CODE_ERROR_NOT_FOUND_EXCEPTION = 101;
+    /**
+     * code for runtime exception.
+     */
+    private static final int CODE_ERROR_RUNTIME_EXCEPTION = 100;
+
+    /**
+     * @param e
+     * @return code and message in runtime exception.
+     */
     @ExceptionHandler(RuntimeException.class)
-    public ResponseEntity<ErrorResponse> handleRuntimeException(RuntimeException e) {
-        var errorResponse = this.buildErrorResponse(100, e.getMessage());
+    public ResponseEntity<ErrorResponse> handleRuntimeException(
+            final RuntimeException e) {
+        ErrorResponse errorResponse
+                = this.buildErrorResponse(CODE_ERROR_RUNTIME_EXCEPTION,
+                e.getMessage());
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                 .body(errorResponse);
     }
-
+    /**
+     * @param e
+     * @return customer id not found.
+     */
     @ExceptionHandler(PaymentNotFoundException.class)
-    public ResponseEntity<ErrorResponse> handleCustomerNotFoundException(PaymentNotFoundException e) {
-        var errorResponse = this.buildErrorResponse(101, String.format("Product with id: '%s' not found", e.getPaymentId()));
+    public ResponseEntity<ErrorResponse> handleCustomerNotFoundException(
+            final PaymentNotFoundException e) {
+        ErrorResponse errorResponse
+                = this.buildErrorResponse(CODE_ERROR_NOT_FOUND_EXCEPTION,
+                String.format("Payment id %s is not found",
+                        e.getPaymentId()));
         return ResponseEntity.status(HttpStatus.NOT_FOUND)
                 .body(errorResponse);
     }
-
-    public ErrorResponse buildErrorResponse(int code, String message) {
+    /**
+     * @param code
+     * @param message
+     * @return code and message for error.
+     */
+    public ErrorResponse buildErrorResponse(final int code,
+                                            final String message) {
         return new ErrorResponse(code, message);
     }
 }

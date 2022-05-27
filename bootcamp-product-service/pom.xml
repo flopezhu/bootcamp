@@ -14,6 +14,9 @@
     <name>bootcamp-product-service</name>
     <description>bootcamp-product-service</description>
     <properties>
+        <!-- Note: If your ACR name contains upper case characters, be sure to convert them to lower case characters. -->
+        <!-- <docker.image.prefix>pocacrms01.azurecr.io</docker.image.prefix>  &lt;!&ndash;change name acr &ndash;&gt;
+         <jib-maven-plugin.version>3.1.4</jib-maven-plugin.version>-->
         <java.version>11</java.version>
         <spring-cloud.version>2021.0.2</spring-cloud.version>
     </properties>
@@ -109,6 +112,19 @@
                     </excludes>
                 </configuration>
             </plugin>
+            <!--<plugin>
+                <artifactId>jib-maven-plugin</artifactId>
+                <groupId>com.google.cloud.tools</groupId>
+                <version>${jib-maven-plugin.version}</version>
+                <configuration>
+                    <from>
+                        <image>mcr.microsoft.com/java/jdk:11-zulu-ubuntu</image>
+                    </from>
+                    <to>
+                        <image>${docker.image.prefix}/${project.artifactId}</image>
+                    </to>
+                </configuration>
+            </plugin>-->
         </plugins>
     </build>
 

@@ -14,9 +14,13 @@
     <name>bootcamp-customer-service</name>
     <description>bootcamp-customer-service</description>
     <properties>
-        <java.version>11</java.version>
+        <!-- Note: If your ACR name contains upper case characters, be sure to convert them to lower case characters. -->
+       <!-- <docker.image.prefix>pocacrms01.azurecr.io</docker.image.prefix>  &lt;!&ndash;change name acr &ndash;&gt;
+        <jib-maven-plugin.version>3.1.4</jib-maven-plugin.version>-->
         <spring-cloud.version>2021.0.2</spring-cloud.version>
+        <java.version>11</java.version>
     </properties>
+
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -50,6 +54,10 @@
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-circuitbreaker-resilience4j</artifactId>
         </dependency>
+        <!--<dependency>
+            <groupId>com.google.cloud.tools</groupId>
+            <artifactId>jib-maven-plugin</artifactId>
+        </dependency>-->
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -114,6 +122,19 @@
                     </excludes>
                 </configuration>
             </plugin>
+            <!--<plugin>
+                <artifactId>jib-maven-plugin</artifactId>
+                <groupId>com.google.cloud.tools</groupId>
+                <version>${jib-maven-plugin.version}</version>
+                <configuration>
+                    <from>
+                        <image>mcr.microsoft.com/java/jdk:11-zulu-ubuntu</image>
+                    </from>
+                    <to>
+                        <image>${docker.image.prefix}/${project.artifactId}</image>
+                    </to>
+                </configuration>
+            </plugin>-->
         </plugins>
     </build>
 

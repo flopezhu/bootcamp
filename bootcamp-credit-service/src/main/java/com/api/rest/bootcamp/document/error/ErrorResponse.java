@@ -7,6 +7,12 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ErrorResponse {
+    /**
+     * error code.
+     */
     private int errorCode;
+    /**
+     * message.
+     */
     private String message;
 }

@@ -1,0 +1,17 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: bootcamp-bankaccount-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: bootcamp-bankaccount-service
+    template:
+      metadata:
+        labels:
+          app: bootcamp-bankaccount-service
+      spec:
+        containers:
+          - name: bootcamp-bankaccount-service
+            image: name-acr

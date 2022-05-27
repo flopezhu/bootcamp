@@ -17,24 +17,33 @@ import java.util.Date;
 @NoArgsConstructor
 @Document(collection = "payment")
 public class Payment {
+    /**
+     * payment id.
+     */
     @Id
     private String id;
-
-    @NotBlank(message = "typeConsumption is mandatory")
+    /**
+     * payment type consumption.
+     */
     private String typeConsumption;
-
-    @NotBlank(message = "amount is mandatory")
+    /**
+     * payment amount.
+     */
     private String amount;
-
-    @NotBlank(message = "currency is mandatory")
+    /**
+     * payment currency.
+     */
     private String currency;
-
-    @NotBlank(message = "bankAccount is mandatory")
+    /**
+     * payment bank account.
+     */
     private String bankAccount;
-
-    @NotBlank(message = "customerId is mandatory")
+    /**
+     * customer id.
+     */
     private String customerId;
-
-    @JsonFormat(pattern = "dd-MM-yyyy hh:mm:ss", timezone = "GMT-05:00")
-    private Date paymentDate = new Date();
+    /**
+     * payment date.
+     */
+    private Date paymentDate;
 }

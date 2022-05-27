@@ -14,43 +14,77 @@ import reactor.core.publisher.Mono;
 
 @Service
 public class BankAccountServiceImpl implements BankAccountService {
-
-    private static final Logger log = LoggerFactory.getLogger(BankAccountServiceImpl.class);
-
+    /**
+     * log for bankAccountServiceImpl.class.
+     */
+    private static final Logger LOG = LoggerFactory
+            .getLogger(BankAccountServiceImpl.class);
+    /**
+     * bank account dao.
+     */
     @Autowired
     private BankAccountDao bankAccountDao;
 
+    /**
+     * @return all accounts.
+     */
     @Override
     public Flux<BankAccountDto> findAllBankAccount() {
-        log.info("TEST");
+        LOG.info("TEST");
         return bankAccountDao.findAll().map(AppUtils::entityToDto);
     }
 
+    /**
+     * @param id
+     * @return find account by id.
+     */
     @Override
-    public Mono<BankAccountDto> findBankAccountById(String id) {
-        return bankAccountDao.findById(id).map(AppUtils::entityToDto).switchIfEmpty(Mono.error(() -> new BankAccountNotFoundException(id)));
+    public Mono<BankAccountDto> findBankAccountById(final String id) {
+        return bankAccountDao.findById(id).map(AppUtils::entityToDto)
+                .switchIfEmpty(Mono.error(() ->
+                        new BankAccountNotFoundException(id)));
     }
 
+    /**
+     * @param bankAccountDtoMono
+     * @return save account.
+     */
     @Override
-    public Mono<BankAccountDto> saveBankAccount(Mono<BankAccountDto> bankAccountDtoMono) {
+    public Mono<BankAccountDto> saveBankAccount(
+            final Mono<BankAccountDto> bankAccountDtoMono) {
         return bankAccountDtoMono.map(AppUtils::dtoToEntities)
                 .flatMap(bankAccountDao::insert)
                 .map(AppUtils::entityToDto);
     }
 
+    /**
+     * @param bankAccountDtoMono
+     * @param id
+     * @return update bank account.
+     */
     @Override
-    public Mono<BankAccountDto> updateBankAccount(Mono<BankAccountDto> bankAccountDtoMono, String id) {
+    public Mono<BankAccountDto> updateBankAccount(
+            final Mono<BankAccountDto> bankAccountDtoMono, final String id) {
         return bankAccountDao.findById(id)
-                .flatMap(customer -> bankAccountDtoMono.map(AppUtils::dtoToEntities))
+                .flatMap(customer -> bankAccountDtoMono
+                        .map(AppUtils::dtoToEntities))
                 .doOnNext(next -> next.setId(id))
                 .flatMap(bankAccountDao::save)
                 .map(AppUtils::entityToDto)
-                .switchIfEmpty(Mono.error(() -> new BankAccountNotFoundException(id)));
+                .switchIfEmpty(Mono.error(() ->
+                        new BankAccountNotFoundException(id)));
     }
 
+    /**
+     * @param id
+     * @return delete bank account id.
+     */
     @Override
-    public Mono<String> deleteBankAccountById(String id) {
-        return bankAccountDao.findById(id).flatMap(customer -> this.bankAccountDao.deleteById(customer.getId())
-                .thenReturn("Customer has deleted")).switchIfEmpty(Mono.error(() -> new BankAccountNotFoundException(id)));
+    public Mono<String> deleteBankAccountById(final String id) {
+        return bankAccountDao.findById(id).flatMap(customer ->
+                this.bankAccountDao.deleteById(customer.getId())
+                .thenReturn("Customer has deleted"))
+                .switchIfEmpty(Mono.error(() ->
+                        new BankAccountNotFoundException(id)));
     }
 }

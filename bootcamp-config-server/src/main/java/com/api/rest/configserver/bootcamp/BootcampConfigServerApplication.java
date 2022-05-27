@@ -7,7 +7,9 @@ import org.springframework.cloud.config.server.EnableConfigServer;
 @SpringBootApplication
 @EnableConfigServer
 public class BootcampConfigServerApplication {
-
+    /**
+     * @param args
+     */
     public static void main(String[] args) {
         SpringApplication.run(BootcampConfigServerApplication.class, args);
     }

@@ -1,0 +1,17 @@
+#apiVersion: apps/v1
+#kind: Deployment
+#metadata:
+#  name: bootcamp-payment-service
+#spec:
+#  replicas: 1
+#  selector:
+#    matchLabels:
+#      app: bootcamp-payment-service
+#    template:
+#      metadata:
+#        labels:
+#          app: bootcamp-payment-service
+#      spec:
+#        containers:
+#          - name: bootcamp-payment-service
+#            image: name-acr

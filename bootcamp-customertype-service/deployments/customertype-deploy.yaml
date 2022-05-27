@@ -1,0 +1,17 @@
+#apiVersion: apps/v1
+#kind: Deployment
+#metadata:
+#  name: bootcamp-customertype-service
+#spec:
+#  replicas: 1
+#  selector:
+#    matchLabels:
+#      app: bootcamp-customertype-service
+#    template:
+#      metadata:
+#        labels:
+#          app: bootcamp-customertype-service
+#      spec:
+#        containers:
+#          - name: bootcamp-customertype-service
+#            image: name-acr

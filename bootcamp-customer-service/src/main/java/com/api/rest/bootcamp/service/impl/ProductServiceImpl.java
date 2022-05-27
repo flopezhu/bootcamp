@@ -13,11 +13,18 @@ import reactor.core.publisher.Mono;
 
 @Service
 public class ProductServiceImpl implements ProductService {
+    /**
+     * web client.
+     */
     @Autowired
     private WebClient webClient;
 
+    /**
+     * @param id
+     * @return consume the product microservice and get a product by id.
+     */
     @Override
-    public Mono<ProductDto> getProductForId(String id) {
+    public Mono<ProductDto> getProductForId(final String id) {
         return webClient.get()
                 .uri("/api/products/" + id)
                 .retrieve()

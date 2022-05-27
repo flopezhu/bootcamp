@@ -5,13 +5,35 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 public interface BankAccountService {
+    /**
+     * @return all account.
+     */
     Flux<BankAccountDto> findAllBankAccount();
 
+    /**
+     * @param id
+     * @return account by id.
+     */
     Mono<BankAccountDto> findBankAccountById(String id);
 
-    Mono<BankAccountDto> saveBankAccount(Mono<BankAccountDto> bankAccountDtoMono);
+    /**
+     * @param bankAccountDtoMono
+     * @return save account and return a json.
+     */
+    Mono<BankAccountDto> saveBankAccount(
+            Mono<BankAccountDto> bankAccountDtoMono);
 
-    Mono<BankAccountDto> updateBankAccount(Mono<BankAccountDto> bankAccountDtoMono, String id);
+    /**
+     * @param bankAccountDtoMono
+     * @param id
+     * @return update bank account and return a json.
+     */
+    Mono<BankAccountDto> updateBankAccount(
+            Mono<BankAccountDto> bankAccountDtoMono, String id);
 
+    /**
+     * @param id
+     * @return a message deleted.
+     */
     Mono<String> deleteBankAccountById(String id);
 }

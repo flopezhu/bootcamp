@@ -14,32 +14,55 @@ import reactor.core.publisher.Mono;
 
 @Service
 public class CreditServiceImpl implements CreditService {
-
-    private static final Logger log = LoggerFactory.getLogger(CreditServiceImpl.class);
-
+    /**
+     * LOG for CreditServiceImpl.class.
+     */
+    private static final Logger LOG = LoggerFactory
+            .getLogger(CreditServiceImpl.class);
+    /**
+     * credit DTO.
+     */
     @Autowired
     private CreditDao creditDao;
 
+    /**
+     * @return get all credits.
+     */
     @Override
     public Flux<CreditDto> getAllCredits() {
         return creditDao.findAll().map(AppUtil::entityToDto);
     }
 
+    /**
+     * @param id
+     * @return get credit for id.
+     */
     @Override
-    public Mono<CreditDto> getCreditForId(String id) {
+    public Mono<CreditDto> getCreditForId(final String id) {
         return creditDao.findById(id).map(AppUtil::entityToDto)
-                .switchIfEmpty(Mono.error(() -> new CreditNotFoundException(id)));
+                .switchIfEmpty(Mono.error(() ->
+                        new CreditNotFoundException(id)));
     }
 
+    /**
+     * @param creditDtoMono
+     * @return save credit.
+     */
     @Override
-    public Mono<CreditDto> saveCredit(Mono<CreditDto> creditDtoMono) {
+    public Mono<CreditDto> saveCredit(final Mono<CreditDto> creditDtoMono) {
         return creditDtoMono.map(AppUtil::dtoToEntities)
                 .flatMap(this.creditDao::insert)
                 .map(AppUtil::entityToDto);
     }
 
+    /**
+     * @param creditDtoMono
+     * @param id
+     * @return update credit for id.
+     */
     @Override
-    public Mono<CreditDto> updateCreditForId(Mono<CreditDto> creditDtoMono, String id) {
+    public Mono<CreditDto> updateCreditForId(
+            final Mono<CreditDto> creditDtoMono, final String id) {
         return creditDao.findById(id)
                 .flatMap(product -> creditDtoMono.map(AppUtil::dtoToEntities))
                 .doOnNext(idProduct -> idProduct.setId(id))
@@ -48,9 +71,16 @@ public class CreditServiceImpl implements CreditService {
                 .switchIfEmpty(Mono.error(() -> new CreditNotFoundException(id)));
     }
 
+    /**
+     * @param id
+     * @return delete credit for id.
+     */
     @Override
-    public Mono<String> deleteCreditForId(String id) {
-        return creditDao.findById(id).flatMap(product -> this.creditDao.deleteById(product.getId())
-                .thenReturn("The Product has deleted")).switchIfEmpty(Mono.error(() -> new CreditNotFoundException(id)));
+    public Mono<String> deleteCreditForId(final String id) {
+        return creditDao.findById(id).flatMap(product ->
+                this.creditDao.deleteById(product.getId())
+                .thenReturn("The Product has deleted"))
+                .switchIfEmpty(Mono.error(() ->
+                        new CreditNotFoundException(id)));
     }
 }

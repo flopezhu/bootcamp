@@ -4,7 +4,6 @@ import lombok.*;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import javax.validation.constraints.NotBlank;
 
 @Getter
 @Setter
@@ -13,18 +12,25 @@ import javax.validation.constraints.NotBlank;
 @Builder
 @Document(collection = "credit")
 public class Credit {
+    /**
+     * credit id.
+     */
     @Id
     private String id;
-
-    @NotBlank(message = "amount is mandatory")
+    /**
+     * credit amount.
+     */
     private String amount;
-
-    @NotBlank(message = "creditLimit is mandatory")
+    /**
+     * credit limit.
+     */
     private String creditLimit;
-
-    @NotBlank(message = "customerId is mandatory")
+    /**
+     * customer id.
+     */
     private String customerId;
-
-    @NotBlank(message = "productId is mandatory")
+    /**
+     * product id.
+     */
     private String productId;
 }

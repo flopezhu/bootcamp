@@ -13,20 +13,35 @@ import java.time.Duration;
 
 @Configuration
 public class CircuitBreakerConfiguration {
-    private static final Logger log = LoggerFactory.getLogger(CircuitBreakerConfiguration.class);
+    /**
+     * LOG for CircuitBreakerConfiguration.class.
+     */
+    private static final Logger LOG = LoggerFactory
+            .getLogger(CircuitBreakerConfiguration.class);
 
+    /**
+     * @return circuit breaker factory.
+     */
     @Bean
-    public Customizer<ReactiveResilience4JCircuitBreakerFactory> slowCustomizer() {
+    public Customizer<ReactiveResilience4JCircuitBreakerFactory>
+    slowCustomizer() {
         return factory -> {
             factory.configure(builder -> builder
-                    .timeLimiterConfig(TimeLimiterConfig.custom().timeoutDuration(Duration.ofSeconds(2)).build())
-                    .circuitBreakerConfig(CircuitBreakerConfig.ofDefaults()), "slow", "slowflux");
-            factory.addCircuitBreakerCustomizer(circuitBreaker -> circuitBreaker.getEventPublisher()
-                    .onError(error -> {
-                        log.error("error encountered in circuit breaker :{}",error.getThrowable().getMessage());
-                    }).onSuccess(success -> {
-                        log.info("circuit breaker  success:{}", success.getCircuitBreakerName());
-                    }));
+                            .timeLimiterConfig(TimeLimiterConfig.custom()
+                                    .timeoutDuration(Duration.ofSeconds(2))
+                                    .build())
+                            .circuitBreakerConfig(CircuitBreakerConfig
+                                    .ofDefaults()),
+                    "test1", "test2");
+            factory.addCircuitBreakerCustomizer(circuitBreaker ->
+                    circuitBreaker.getEventPublisher()
+                            .onError(error -> {
+                                LOG.error("bug found in circuit breaker:{}",
+                                        error.getThrowable().getMessage());
+                            }).onSuccess(success -> {
+                                LOG.info("circuit breaker  success:{}",
+                                        success.getCircuitBreakerName());
+                            }));
         };
     }
 }

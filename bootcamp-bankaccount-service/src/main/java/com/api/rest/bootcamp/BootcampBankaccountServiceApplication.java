@@ -7,9 +7,12 @@ import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 @SpringBootApplication
 @EnableEurekaClient
 public class BootcampBankaccountServiceApplication {
-
-    public static void main(String[] args) {
-        SpringApplication.run(BootcampBankaccountServiceApplication.class, args);
+    /**
+     * @param args
+     */
+    public static void main(final String[] args) {
+        SpringApplication.run(BootcampBankaccountServiceApplication.class,
+                args);
     }
 
 }

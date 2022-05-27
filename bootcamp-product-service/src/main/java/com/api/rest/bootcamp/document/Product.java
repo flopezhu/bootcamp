@@ -14,17 +14,29 @@ import java.util.Date;
 @NoArgsConstructor
 @Document(collection = "products")
 public class Product {
+    /**
+     * product id.
+     */
     @Id
     private String id;
+    /**
+     * product code.
+     */
     private String code;
-
-    @NotBlank(message = "productType is mandatory")
+    /**
+     * product type.
+     */
     private String productType;
-
-    @NotBlank(message = "productName is mandatory")
+    /**
+     * product name.
+     */
     private String productName;
+    /**
+     * product description.
+     */
     private String description;
-
-    @JsonFormat(pattern="dd-MM-yyyy hh:mm:ss", timezone="GMT-05:00")
-    private Date creationTime = new Date();
+    /**
+     * product creation time.
+     */
+    private Date creationTime;
 }

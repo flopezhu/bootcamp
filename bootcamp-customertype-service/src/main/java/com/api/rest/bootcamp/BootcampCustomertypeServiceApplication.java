@@ -9,13 +9,18 @@ import org.springframework.context.annotation.Bean;
 @SpringBootApplication
 @EnableEurekaClient
 public class BootcampCustomertypeServiceApplication {
-
+    /**
+     * @return object mapping.
+     */
     @Bean
     public ModelMapper modelMapper() {
         return new ModelMapper();
     }
 
-    public static void main(String[] args) {
+    /**
+     * @param args
+     */
+    public static void main(final String[] args) {
         SpringApplication.run(BootcampCustomertypeServiceApplication.class, args);
     }
 

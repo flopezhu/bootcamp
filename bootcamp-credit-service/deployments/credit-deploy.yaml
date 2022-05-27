@@ -1,0 +1,17 @@
+#apiVersion: apps/v1
+#kind: Deployment
+#metadata:
+#  name: bootcamp-credit-service
+#spec:
+#  replicas: 1
+#  selector:
+#    matchLabels:
+#      app: bootcamp-credit-service
+#    template:
+#      metadata:
+#        labels:
+#          app: bootcamp-credit-service
+#      spec:
+#        containers:
+#          - name: bootcamp-credit-service
+#            image: name-acr

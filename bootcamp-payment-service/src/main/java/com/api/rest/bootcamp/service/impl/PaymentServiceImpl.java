@@ -14,43 +14,74 @@ import reactor.core.publisher.Mono;
 
 @Service
 public class PaymentServiceImpl implements PaymentService {
-
-    private static final Logger log = LoggerFactory.getLogger(PaymentServiceImpl.class);
-
+    /**
+     * LOG PaymentServiceImpla.class.
+     */
+    private static final Logger LOG = LoggerFactory.getLogger(PaymentServiceImpl.class);
+    /**
+     * payemnt DAO.
+     */
     @Autowired
     private PaymentDao paymentDao;
 
+    /**
+     * @return get all payments.
+     */
     @Override
     public Flux<PaymentDto> getAllPayments() {
         return paymentDao.findAll().map(AppUtil::entityToDto);
     }
 
+    /**
+     * @param id
+     * @return get payment for id.
+     */
     @Override
-    public Mono<PaymentDto> getPaymentForId(String id) {
+    public Mono<PaymentDto> getPaymentForId(final String id) {
         return paymentDao.findById(id).map(AppUtil::entityToDto)
-                .switchIfEmpty(Mono.error(() -> new PaymentNotFoundException(id)));
+                .switchIfEmpty(Mono.error(() ->
+                        new PaymentNotFoundException(id)));
     }
 
+    /**
+     * @param paymentDtoMono
+     * @return save payment.
+     */
     @Override
-    public Mono<PaymentDto> savePayment(Mono<PaymentDto> paymentDtoMono) {
+    public Mono<PaymentDto> savePayment(final Mono<PaymentDto> paymentDtoMono) {
         return paymentDtoMono.map(AppUtil::dtoToEntities)
                 .flatMap(paymentDao::insert)
                 .map(AppUtil::entityToDto);
     }
 
+    /**
+     * @param paymentDtoMono
+     * @param id
+     * @return update payment for id.
+     */
     @Override
-    public Mono<PaymentDto> updatePaymentForId(Mono<PaymentDto> paymentDtoMono, String id) {
+    public Mono<PaymentDto> updatePaymentForId(
+            final Mono<PaymentDto> paymentDtoMono,
+            final String id) {
         return paymentDao.findById(id)
                 .flatMap(product -> paymentDtoMono.map(AppUtil::dtoToEntities))
                 .doOnNext(idProduct -> idProduct.setId(id))
                 .flatMap(paymentDao::save)
                 .map(AppUtil::entityToDto)
-                .switchIfEmpty(Mono.error(() -> new PaymentNotFoundException(id)));
+                .switchIfEmpty(Mono.error(() ->
+                        new PaymentNotFoundException(id)));
     }
 
+    /**
+     * @param id
+     * @return delete payment for id.
+     */
     @Override
-    public Mono<String> deletePaymentForId(String id) {
-        return paymentDao.findById(id).flatMap(product -> this.paymentDao.deleteById(product.getId())
-                .thenReturn("The Product has deleted")).switchIfEmpty(Mono.error(() -> new PaymentNotFoundException(id)));
+    public Mono<String> deletePaymentForId(final String id) {
+        return paymentDao.findById(id).flatMap(product ->
+                this.paymentDao.deleteById(product.getId())
+                .thenReturn("The Product has deleted"))
+                .switchIfEmpty(Mono.error(() ->
+                        new PaymentNotFoundException(id)));
     }
 }

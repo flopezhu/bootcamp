@@ -1,0 +1,17 @@
+#apiVersion: apps/v1
+#kind: Deployment
+#metadata:
+#  name: bootcamp-gateway-service
+#spec:
+#  replicas: 1
+#  selector:
+#    matchLabels:
+#      app: bootcamp-gateway-service
+#    template:
+#      metadata:
+#        labels:
+#          app: bootcamp-gateway-service
+#      spec:
+#        containers:
+#          - name: bootcamp-gateway-service
+#            image: name-acr

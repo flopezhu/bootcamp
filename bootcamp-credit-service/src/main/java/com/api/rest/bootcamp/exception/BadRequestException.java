@@ -1,10 +1,16 @@
 package com.api.rest.bootcamp.exception;
 
 public class BadRequestException extends RuntimeException {
+    /**
+     * nothing.
+     */
     public BadRequestException() {
     }
 
-    public BadRequestException(String message) {
+    /**
+     * @param message
+     */
+    public BadRequestException(final String message) {
         super(message);
     }
 }

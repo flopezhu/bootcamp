@@ -14,40 +14,76 @@ import reactor.core.publisher.Mono;
 
 @Service
 public class ProductServiceImpl implements ProductService {
-    private static final Logger log = LoggerFactory.getLogger(ProductServiceImpl.class);
+    /**
+     * LOG ProductServiceImpl.class.
+     */
+    private static final Logger LOG = LoggerFactory
+            .getLogger(ProductServiceImpl.class);
+    /**
+     * product DAO.
+     */
     @Autowired
     private ProductDao productDao;
 
+    /**
+     * @return get all products.
+     */
     @Override
     public Flux<ProductDto> getAllProducts() {
         return productDao.findAll().map(AppUtils::entityToDto);
     }
 
+    /**
+     * @param id
+     * @return get product for id.
+     */
     @Override
-    public Mono<ProductDto> getProductForId(String id) {
-        return productDao.findById(id).map(AppUtils::entityToDto).switchIfEmpty(Mono.error(() -> new ProductNotFoundException(id)));
+    public Mono<ProductDto> getProductForId(final String id) {
+        return productDao.findById(id)
+                .map(AppUtils::entityToDto)
+                .switchIfEmpty(Mono.error(() ->
+                        new ProductNotFoundException(id)));
     }
 
+    /**
+     * @param productDtoMono
+     * @return save product.
+     */
     @Override
-    public Mono<ProductDto> saveProduct(Mono<ProductDto> productDtoMono) {
+    public Mono<ProductDto> saveProduct(final Mono<ProductDto> productDtoMono) {
         return productDtoMono.map(AppUtils::dtoToEntities)
                 .flatMap(productDao::insert)
                 .map(AppUtils::entityToDto);
     }
 
+    /**
+     * @param productDtoMono
+     * @param id
+     * @return update product for id.
+     */
     @Override
-    public Mono<ProductDto> updateProductForId(Mono<ProductDto> productDtoMono, String id) {
+    public Mono<ProductDto> updateProductForId(
+            final Mono<ProductDto> productDtoMono,
+            final String id) {
         return productDao.findById(id)
                 .flatMap(product -> productDtoMono.map(AppUtils::dtoToEntities))
                 .doOnNext(idProduct -> idProduct.setId(id))
                 .flatMap(productDao::save)
                 .map(AppUtils::entityToDto)
-                .switchIfEmpty(Mono.error(() -> new ProductNotFoundException(id)));
+                .switchIfEmpty(Mono.error(() ->
+                        new ProductNotFoundException(id)));
     }
 
+    /**
+     * @param id
+     * @return delete product for id.
+     */
     @Override
-    public Mono<String> deleteProductForId(String id) {
-        return productDao.findById(id).flatMap(product -> this.productDao.deleteById(product.getId())
-                .thenReturn("The Product has deleted")).switchIfEmpty(Mono.error(() -> new ProductNotFoundException(id)));
+    public Mono<String> deleteProductForId(final String id) {
+        return productDao.findById(id).flatMap(product ->
+                this.productDao.deleteById(product.getId())
+                .thenReturn("The Product has deleted"))
+                .switchIfEmpty(Mono.error(() ->
+                        new ProductNotFoundException(id)));
     }
 }
