@@ -1,57 +1,10 @@
-#port
-server:
-  port: 8081
-
-#mongodb
 spring:
-  data:
-    mongodb:
-      uri: mongodb+srv://admin:admin@cluster0.oksp7.mongodb.net/bootcamp_customer?retryWrites=true&w=majority
-
-#eureka
-eureka:
-  client:
-    service-url:
-      defaultZone: http://localhost:8761/eureka/
-#  instance:
-#    hostname: localhost
-
-#circuitBraker
-resilience4j:
-  circuitbreaker:
-    instances:
-      customerTypeInfoService:
-        registerHealthIndicator: true
-        eventConsumerBufferSize: 10
-        automaticTransitionFromOpenToHalfOpenEnabled: true
-        failureRateThreshold: 50
-        minimumNumberOfCalls: 5
-        permittedNumberOfCallsInHalfOpenState: 3
-        slidingWindowSize: 10
-        waitDurationInOpenState: 5s
-        slidingWindowType: COUNT_BASED
-        timeoutDuration: 2s
-      productInfoService:
-        registerHealthIndicator: true
-        eventConsumerBufferSize: 10
-        automaticTransitionFromOpenToHalfOpenEnabled: true
-        failureRateThreshold: 50
-        minimumNumberOfCalls: 5
-        permittedNumberOfCallsInHalfOpenState: 3
-        slidingWindowSize: 10
-        waitDurationInOpenState: 5s
-        slidingWindowType: COUNT_BASED
-        timeoutDuration: 2s
-management:
-  health:
-    circuitbreakers:
+  application:
+    name: bootcamp-customer-service
+  cloud:
+    config:
+      uri: http://localhost:8888
+      username: root
+      password: admin
       enabled: true
-  endpoints:
-    web:
-      exposure:
-        include: health
-  endpoint:
-    health:
-      show-details: always
-
-
+debug: false
