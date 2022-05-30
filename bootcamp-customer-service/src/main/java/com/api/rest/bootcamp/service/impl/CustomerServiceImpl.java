@@ -95,15 +95,7 @@ public class CustomerServiceImpl implements CustomerService {
                         .hasElement()
                         .map(success -> success))
                 .map(customerDto -> {
-                    DataBinder binder = new DataBinder(customerDto);
-                    binder.setValidator(validator);
-                    binder.validate();
-                    if (binder.getBindingResult().hasErrors()) {
-                        LOG.error(binder.getBindingResult()
-                                .getAllErrors().toString());
-                        throw new CustomValidationException(binder
-                                .getBindingResult().getAllErrors());
-                    }
+                    errors(customerDto);
                     return customerDto;
                 })
                 .map(AppUtils::dtoToEntities)
@@ -125,6 +117,32 @@ public class CustomerServiceImpl implements CustomerService {
                 .flatMap(customer -> customerDtoMono
                         .map(AppUtils::dtoToEntities))
                 .doOnNext(next -> next.setId(id))
+                .filterWhen(customerDto -> customerTypeService
+                        .getCustomerTypeForId(customerDto.getCustomerTypeId())
+                        .doOnNext(foundCustomerType ->
+                                LOG.debug("Customer type exists: " +
+                                        customerDto.getCustomerTypeId()))
+                        .hasElement()
+                        .map(success -> success))
+                .filterWhen(customerDto -> productService
+                        .getProductForId(customerDto.getProductId())
+                        .doOnNext(foundProduct ->
+                                LOG.debug("Product exists: " +
+                                        customerDto.getProductId()))
+                        .hasElement()
+                        .map(success -> success))
+                .map(customer -> {
+                    DataBinder binder = new DataBinder(customer);
+                    binder.setValidator(validator);
+                    binder.validate();
+                    if (binder.getBindingResult().hasErrors()) {
+                        LOG.error(binder.getBindingResult()
+                                .getAllErrors().toString());
+                        throw new CustomValidationException(binder
+                                .getBindingResult().getAllErrors());
+                    }
+                    return customer;
+                })
                 .flatMap(customerDAO::save)
                 .map(AppUtils::entityToDto)
                 .switchIfEmpty(Mono.error(() ->
@@ -151,6 +169,22 @@ public class CustomerServiceImpl implements CustomerService {
     private Mono<String> customerTypeId(final String id) {
         return customerTypeService.getCustomerTypeForId(id)
                 .map(CustomerTypeDto::getId);
+    }
+
+    /**
+     * @param customer
+     * register all errors
+     */
+    private void errors(final CustomerDto customer) {
+        DataBinder binder = new DataBinder(customer);
+        binder.setValidator(validator);
+        binder.validate();
+        if (binder.getBindingResult().hasErrors()) {
+            LOG.error(binder.getBindingResult()
+                    .getAllErrors().toString());
+            throw new CustomValidationException(binder
+                    .getBindingResult().getAllErrors());
+        }
     }
 
     private void validCustomerType(final Mono<CustomerDto> customerDtoMono,
