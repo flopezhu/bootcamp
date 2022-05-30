@@ -38,6 +38,7 @@ public class CustomerDto {
     /**
      * customer date birth.
      */
+    @JsonFormat(pattern = "dd-MM-yyyy")
     private Date dateBirth;
     /**
      * customer document type.

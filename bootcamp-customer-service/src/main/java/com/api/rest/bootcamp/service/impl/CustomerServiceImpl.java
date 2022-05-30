@@ -3,15 +3,20 @@ package com.api.rest.bootcamp.service.impl;
 import com.api.rest.bootcamp.document.error.CustomerNotFoundException;
 import com.api.rest.bootcamp.dto.CustomerDto;
 import com.api.rest.bootcamp.dto.CustomerTypeDto;
+import com.api.rest.bootcamp.exception.CustomValidationException;
 import com.api.rest.bootcamp.exception.NotFoundException;
 import com.api.rest.bootcamp.repository.CustomerDao;
 import com.api.rest.bootcamp.service.CustomerService;
 import com.api.rest.bootcamp.service.CustomerTypeService;
+import com.api.rest.bootcamp.service.ProductService;
 import com.api.rest.bootcamp.util.AppUtils;
+import com.netflix.discovery.converters.Auto;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.validation.DataBinder;
+import org.springframework.validation.Validator;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import reactor.core.scheduler.Schedulers;
@@ -38,6 +43,16 @@ public class CustomerServiceImpl implements CustomerService {
      */
     @Autowired
     private CustomerTypeService customerTypeService;
+    /**
+     * product service
+     */
+    @Autowired
+    private ProductService productService;
+    /**
+     * validate
+     */
+    @Autowired
+    private Validator validator;
 
     /**
      * @return all customers.
@@ -64,12 +79,32 @@ public class CustomerServiceImpl implements CustomerService {
      */
     @Override
     public Mono<CustomerDto> save(final Mono<CustomerDto> customer) {
-        Mono<String> customerId = customer.map(CustomerDto::getCustomerTypeId);
-        return customer.filterWhen(customerDto -> {
-           return Mono.sequenceEqual(customerTypeId(
-                   customerDto.getCustomerTypeId()), customerId)
-                    .switchIfEmpty(Mono.error(
-                            new NotFoundException("Customer type not found")));
+        return customer
+                .filterWhen(customerDto -> customerTypeService
+                        .getCustomerTypeForId(customerDto.getCustomerTypeId())
+                        .doOnNext(foundCustomerType ->
+                                LOG.debug("Customer type exists: " +
+                                        customerDto.getCustomerTypeId()))
+                        .hasElement()
+                        .map(success -> success))
+                .filterWhen(customerDto -> productService
+                        .getProductForId(customerDto.getProductId())
+                        .doOnNext(foundProduct ->
+                                LOG.debug("Product exists: " +
+                                        customerDto.getProductId()))
+                        .hasElement()
+                        .map(success -> success))
+                .map(customerDto -> {
+                    DataBinder binder = new DataBinder(customerDto);
+                    binder.setValidator(validator);
+                    binder.validate();
+                    if (binder.getBindingResult().hasErrors()) {
+                        LOG.error(binder.getBindingResult()
+                                .getAllErrors().toString());
+                        throw new CustomValidationException(binder
+                                .getBindingResult().getAllErrors());
+                    }
+                    return customerDto;
                 })
                 .map(AppUtils::dtoToEntities)
                 .flatMap(customerDAO::insert)

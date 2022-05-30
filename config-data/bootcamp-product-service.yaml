@@ -7,9 +7,19 @@ spring:
   data:
     mongodb:
       uri: mongodb+srv://admin:admin@cluster0.oksp7.mongodb.net/bootcamp-product?retryWrites=true&w=majority
+  cloud:
+    discovery:
+      enabled: true
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+          lower-case-service-id: true
 
 #eureka
 eureka:
+  instance:
+    hostname: localhost
   client:
     service-url:
-      defaultZone: http://localhost:8761/eureka/
+      defaultZone: http://${eureka.instance.hostname}:8761/eureka/
