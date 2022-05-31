@@ -42,8 +42,8 @@ spring:
           predicates:
             - Path=/api/payments/**
         - id: bootcamp-assurance-service
-            uri: lb://BOOTCAMP-ASSURANCE-SERVICE
-            predicates:
+          uri: lb://BOOTCAMP-ASSURANCE-SERVICE
+          predicates:
             - Path=/api/assurance/**
 management:
   health:
