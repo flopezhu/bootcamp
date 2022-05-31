@@ -1,0 +1,25 @@
+#port
+server:
+  port: 8088
+
+#mongodb
+spring:
+  data:
+    mongodb:
+      uri: mongodb+srv://admin:admin@cluster0.oksp7.mongodb.net/bootcamp-credit?retryWrites=true&w=majority
+  cloud:
+    discovery:
+      enabled: true
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+          lower-case-service-id: true
+
+#eureka
+eureka:
+  instance:
+    hostname: localhost
+  client:
+    service-url:
+      defaultZone: http://${eureka.instance.hostname}:8761/eureka/

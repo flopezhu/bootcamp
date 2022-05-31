@@ -3,6 +3,7 @@ package com.api.rest.bootcamp.dto;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
 
 import javax.validation.constraints.NotBlank;
 import java.util.Date;
@@ -19,6 +20,7 @@ public class CustomerDto {
     /**
      * customer code.
      */
+    @Indexed(name = "code", unique = true)
     private String code;
     /**
      * customer name.
@@ -58,11 +60,13 @@ public class CustomerDto {
     /**
      * customer phone.
      */
+    @Indexed(name = "phone", unique = true)
     private String phone;
     /**
      * customer email.
      */
     @NotBlank(message = "email is mandatory")
+    @Indexed(name = "email", unique = true)
     private String email;
     /**
      * customer type id.

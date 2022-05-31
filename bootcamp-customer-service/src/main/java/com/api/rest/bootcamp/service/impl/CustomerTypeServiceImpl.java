@@ -1,6 +1,8 @@
 package com.api.rest.bootcamp.service.impl;
 
+import com.api.rest.bootcamp.document.error.CustomerNotFoundException;
 import com.api.rest.bootcamp.dto.CustomerTypeDto;
+import com.api.rest.bootcamp.exception.NotFoundException;
 import com.api.rest.bootcamp.service.CustomerTypeService;
 import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import lombok.Getter;
@@ -39,6 +41,9 @@ public class CustomerTypeServiceImpl implements CustomerTypeService {
         return webClient.get()
                 .uri("/api/customerType/" + id)
                 .retrieve()
-                .bodyToMono(CustomerTypeDto.class);
+                .bodyToMono(CustomerTypeDto.class)
+                .switchIfEmpty(Mono
+                        .error(new NotFoundException("Customer id: 's%'" +
+                                " not found or service is not available"+ id)));
     }
 }
