@@ -41,10 +41,10 @@ spring:
           uri: lb://BOOTCAMP-PAYMENT-SERVICE
           predicates:
             - Path=/api/payments/**
-        - id: bootcamp-bankfee-service
-            uri: lb://BOOTCAMP-BANKFEE-SERVICE
+        - id: bootcamp-assurance-service
+            uri: lb://BOOTCAMP-ASSURANCE-SERVICE
             predicates:
-              - Path=/api/bankfee/**
+            - Path=/api/assurance/**
 management:
   health:
     circuitbreakers:
