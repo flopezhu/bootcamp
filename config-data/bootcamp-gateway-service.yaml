@@ -41,8 +41,8 @@ spring:
           uri: lb://BOOTCAMP-PAYMENT-SERVICE
           predicates:
             - Path=/api/payments/**
-        - id: bootcamp-bankfees-service
-            uri: lb://BOOTCAMP-BANKFEES-SERVICE
+        - id: bootcamp-bankfee-service
+            uri: lb://BOOTCAMP-BANKFEE-SERVICE
             predicates:
               - Path=/api/bankfee/**
 management:
