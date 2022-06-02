@@ -2,6 +2,13 @@
 server:
   port: 8081
 
+#kafka
+kafka:
+  subscribed-topic:
+    name: transaction-request
+  topic-to-publish:
+    name: transaction-response
+
 #mongodb
 spring:
   data:
@@ -15,6 +22,20 @@ spring:
         locator:
           enabled: true
           lower-case-service-id: true
+  kafka:
+    bootstrap-servers: localhost:9092
+    consumer:
+      group-id: transaction-group
+      auto-offset-reset: latest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+  cache:
+    type: redis
+  redis:
+    host: localhost
+    port: 6379
+#base-api:
+#  base-url: http://localhost:8000
 
 #eureka
 eureka:
