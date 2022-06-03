@@ -23,17 +23,17 @@ public class AssuranceDto {
      * minimum amount.
      */
     @NotBlank(message = "minimumAmount is mandatory")
-    private BigDecimal minimumAmount;
+    private String minimumAmount;
     /**
      * maximum amount.
      */
     @NotBlank(message = "maximumAmount is mandatory")
-    private BigDecimal maximumAmount;
+    private String maximumAmount;
     /**
      * price
      */
     @NotBlank(message = "price is mandatory")
-    private BigDecimal price;
+    private String price;
     /**
      * status: 0 -> inactive | 1 -> active
      */

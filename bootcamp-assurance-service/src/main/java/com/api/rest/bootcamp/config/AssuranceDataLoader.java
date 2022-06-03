@@ -22,7 +22,7 @@ public class AssuranceDataLoader implements ApplicationRunner {
     @Override
     public void run(ApplicationArguments args) throws Exception {
         if (Objects.equals(bankFeeService.count().block(), 0L)) {
-            Mono<Assurance> bankFee1 =
+            /*Mono<Assurance> bankFee1 =
                     Flux.just(Assurance.builder().id(UUID.randomUUID().toString())
                             .description("Bank fees number 1")
                             .minimumAmount(BigDecimal.valueOf(0))
@@ -61,7 +61,7 @@ public class AssuranceDataLoader implements ApplicationRunner {
                             .take(1)
                             .single();
             List.of(bankFee1)
-                    .forEach(bankFee -> System.out.println("list mono"+ bankFee));
+                    .forEach(bankFee -> System.out.println("list mono"+ bankFee));*/
         }
     }
 }

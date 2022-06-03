@@ -1,7 +1,10 @@
 package com.api.rest.bootcamp.util;
 
+import com.api.rest.bootcamp.api.client.response.CustomerTypeResponse;
 import com.api.rest.bootcamp.document.Customer;
 import com.api.rest.bootcamp.dto.CustomerDto;
+import com.api.rest.bootcamp.redis.model.CustomerTypeCache;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.BeanUtils;
 
 public final class AppUtils {
@@ -26,7 +29,22 @@ public final class AppUtils {
     }
 
     /**
+     *
+     */
+    public static ObjectMapper objectMapper = new ObjectMapper();
+
+    /**
+     * @param customerTypeCache
+     * @return customer type response.
+     */
+        public static CustomerTypeCache customerResponseToCache(final CustomerTypeResponse customerTypeResponse) {
+        CustomerTypeCache customerTypeCache = new CustomerTypeCache();
+        BeanUtils.copyProperties(customerTypeResponse, customerTypeCache);
+        return customerTypeCache;
+    }
+    /**
      * constructor for default empty.
      */
-    private AppUtils() { }
+    private AppUtils() {
+    }
 }

@@ -80,8 +80,8 @@ public class CustomerServiceImpl implements CustomerService {
     @Override
     public Mono<CustomerDto> save(final Mono<CustomerDto> customer) {
         return customer
-                .filterWhen(customerDto -> customerTypeService
-                        .getCustomerTypeForId(customerDto.getCustomerTypeId())
+                /*.filterWhen(customerDto -> customerTypeService
+                        .getAllCustomerType()
                         .doOnNext(foundCustomerType ->
                                 LOG.debug("Customer type exists: " +
                                         customerDto.getCustomerTypeId()))
@@ -97,7 +97,7 @@ public class CustomerServiceImpl implements CustomerService {
                 .map(customerDto -> {
                     errors(customerDto);
                     return customerDto;
-                })
+                })*/
                 .map(AppUtils::dtoToEntities)
                 .flatMap(customerDAO::insert)
                 .map(AppUtils::entityToDto)
@@ -117,7 +117,7 @@ public class CustomerServiceImpl implements CustomerService {
                 .flatMap(customer -> customerDtoMono
                         .map(AppUtils::dtoToEntities))
                 .doOnNext(next -> next.setId(id))
-                .filterWhen(customerDto -> customerTypeService
+                /*.filterWhen(customerDto -> customerTypeService
                         .getCustomerTypeForId(customerDto.getCustomerTypeId())
                         .doOnNext(foundCustomerType ->
                                 LOG.debug("Customer type exists: " +
@@ -142,7 +142,7 @@ public class CustomerServiceImpl implements CustomerService {
                                 .getBindingResult().getAllErrors());
                     }
                     return customer;
-                })
+                })*/
                 .flatMap(customerDAO::save)
                 .map(AppUtils::entityToDto)
                 .switchIfEmpty(Mono.error(() ->
@@ -155,9 +155,10 @@ public class CustomerServiceImpl implements CustomerService {
      */
     @Override
     public Mono<String> deleteById(final String id) {
-        return customerDAO.findById(id).flatMap(customer ->
-                        this.customerDAO.deleteById(customer.getId())
-                                .thenReturn("Customer has deleted"))
+        return customerDAO.findById(id)
+                .flatMap(customer -> this.customerDAO
+                        .deleteById(customer.getId())
+                        .thenReturn("Customer has deleted"))
                 .switchIfEmpty(Mono.error(() ->
                         new CustomerNotFoundException(id)));
     }
@@ -166,10 +167,10 @@ public class CustomerServiceImpl implements CustomerService {
      * @param id
      * @return customer type id.
      */
-    private Mono<String> customerTypeId(final String id) {
+    /*private Mono<String> customerTypeId(final String id) {
         return customerTypeService.getCustomerTypeForId(id)
                 .map(CustomerTypeDto::getId);
-    }
+    }*/
 
     /**
      * @param customer
@@ -187,7 +188,7 @@ public class CustomerServiceImpl implements CustomerService {
         }
     }
 
-    private void validCustomerType(final Mono<CustomerDto> customerDtoMono,
+    /*private void validCustomerType(final Mono<CustomerDto> customerDtoMono,
                                    final Mono<String> id) {
         Mono<Object> customerMono = customerDtoMono
                 .map(CustomerDto::getCustomerTypeId);
@@ -207,5 +208,5 @@ public class CustomerServiceImpl implements CustomerService {
                 .filter(objects -> objects.getT2().getCustomerTypeId()
                         .equals(objects.getT1().getId()))
                 .switchIfEmpty(Mono.error(new RuntimeException("null")));
-    }
+    }*/
 }

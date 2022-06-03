@@ -25,19 +25,24 @@ public class Assurance {
     /**
      * minimum amount.
      */
-    private BigDecimal minimumAmount;
+    private String minimumAmount;
     /**
      * maximum amount.
      */
-    private BigDecimal maximumAmount;
+    private String maximumAmount;
     /**
      * price
      */
-    private BigDecimal price;
+    private String price;
     /**
      * status: 0 -> inactive | 1 -> active
      */
     private String status;
 
-
+    /**
+     * @return active.
+     */
+    public boolean isActive() {
+        return this.status.equals("1");
+    }
 }

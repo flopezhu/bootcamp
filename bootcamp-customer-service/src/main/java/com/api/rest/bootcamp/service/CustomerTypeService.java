@@ -1,12 +1,15 @@
 package com.api.rest.bootcamp.service;
 
 import com.api.rest.bootcamp.dto.CustomerTypeDto;
-import reactor.core.publisher.Mono;
+import com.api.rest.bootcamp.redis.model.CustomerTypeCache;
+import reactor.core.publisher.Flux;
+
+import java.util.List;
 
 public interface CustomerTypeService {
     /**
-     * @param id
      * @return get customer type for id.
      */
-    Mono<CustomerTypeDto> getCustomerTypeForId(String id);
+    List<CustomerTypeCache> getAllCustomerType();
+    String storageCustomerTypeList(List<CustomerTypeCache> customerTypeCache);
 }

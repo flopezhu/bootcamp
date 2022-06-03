@@ -1,5 +1,6 @@
 package com.api.rest.bootcamp.dto;
 
+import com.api.rest.bootcamp.documents.Assurance;
 import lombok.*;
 
 import java.math.BigDecimal;
@@ -17,13 +18,13 @@ public class AssuranceResponse {
     /**
      * minimum amount.
      */
-    private BigDecimal minimumAmount;
+    private String minimumAmount;
     /**
      * maximum amount.
      */
-    private BigDecimal maximumAmount;
+    private String maximumAmount;
     /**
      * price
      */
-    private BigDecimal price;
+    private String price;
 }

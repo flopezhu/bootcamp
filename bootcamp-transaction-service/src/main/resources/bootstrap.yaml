@@ -1,6 +1,6 @@
 spring:
   application:
-    name: bootcamp-customertype-service
+    name: bootcamp-transaction-service
   cloud:
     config:
       uri: http://localhost:8888
@@ -8,3 +8,5 @@ spring:
       password: admin
       enabled: true
 debug: false
+
+

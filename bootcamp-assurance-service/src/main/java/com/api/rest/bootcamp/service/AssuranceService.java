@@ -7,7 +7,7 @@ import reactor.core.publisher.Mono;
 
 public interface AssuranceService {
     /**
-     * @param bankFeeDtoMono
+     * @param assuranceDtoMono
      * @return bankFeeDto.
      */
     Mono<AssuranceDto> createNewAssurance(Mono<AssuranceDto> assuranceDtoMono);
@@ -20,4 +20,7 @@ public interface AssuranceService {
      * @return count objects.
      */
     Mono<Long> count();
+
+    Mono<String> deleteAssuranceForId(String id);
+
 }
