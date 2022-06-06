@@ -34,7 +34,7 @@ public final class AppUtils {
     public static ObjectMapper objectMapper = new ObjectMapper();
 
     /**
-     * @param customerTypeCache
+     * @param customerTypeResponse
      * @return customer type response.
      */
         public static CustomerTypeCache customerResponseToCache(final CustomerTypeResponse customerTypeResponse) {

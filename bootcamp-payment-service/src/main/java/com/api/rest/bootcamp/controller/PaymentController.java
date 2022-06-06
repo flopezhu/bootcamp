@@ -1,7 +1,11 @@
 package com.api.rest.bootcamp.controller;
 
 import com.api.rest.bootcamp.dto.PaymentDto;
+import com.api.rest.bootcamp.kafka.producer.KafkaProducer;
 import com.api.rest.bootcamp.service.PaymentService;
+import com.api.rest.bootcamp.util.AppUtil;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -10,7 +14,7 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 import java.net.URI;
-
+@Slf4j
 @RestController
 @RequestMapping(value = "/api/payments")
 public class PaymentController {
@@ -19,6 +23,11 @@ public class PaymentController {
      */
     @Autowired
     private PaymentService paymentService;
+    /**
+     * kafka producer.
+     */
+    @Autowired
+    private KafkaProducer kafkaProducer;
 
     /**
      * @return get all payments.
@@ -44,13 +53,16 @@ public class PaymentController {
     }
 
     /**
-     * @param productDtoMono
+     * @param transaction
      * @return save payment.
      */
     @PostMapping("/register")
     public Mono<ResponseEntity<PaymentDto>> savePayment(
-            @RequestBody final Mono<PaymentDto> productDtoMono) {
-        return paymentService.savePayment(productDtoMono)
+            @RequestBody final String transaction) throws JsonProcessingException {
+        kafkaProducer.publishMessage(transaction);
+        log.info("start send transaction:" + transaction);
+        PaymentDto paymentDto = AppUtil.objectMapper.readValue(transaction, PaymentDto.class);
+        return paymentService.savePayment(paymentDto)
                 .map(productDto -> ResponseEntity
                         .created(URI.create("/api/products"
                                 .concat(productDto.getId())))

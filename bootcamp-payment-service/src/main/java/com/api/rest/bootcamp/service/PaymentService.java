@@ -20,7 +20,7 @@ public interface PaymentService {
      * @param paymentDtoMono
      * @return save payment.
      */
-    Mono<PaymentDto> savePayment(Mono<PaymentDto> paymentDtoMono);
+    Mono<PaymentDto> savePayment(PaymentDto paymentDto);
 
     /**
      * @param paymentDtoMono

@@ -2,6 +2,7 @@ package com.api.rest.bootcamp.util;
 
 import com.api.rest.bootcamp.document.Payment;
 import com.api.rest.bootcamp.dto.PaymentDto;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.BeanUtils;
 
 public final class AppUtil {
@@ -24,6 +25,10 @@ public final class AppUtil {
         BeanUtils.copyProperties(paymentDto, payment);
         return payment;
     }
+    /**
+     * object mapper.
+     */
+    public static ObjectMapper objectMapper = new ObjectMapper();
 
     /**
      * private constructor empty for default.

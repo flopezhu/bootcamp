@@ -1,5 +1,6 @@
 package com.api.rest.bootcamp.service.impl;
 
+import com.api.rest.bootcamp.document.Payment;
 import com.api.rest.bootcamp.document.error.PaymentNotFoundException;
 import com.api.rest.bootcamp.dto.PaymentDto;
 import com.api.rest.bootcamp.repository.PaymentDao;
@@ -44,14 +45,17 @@ public class PaymentServiceImpl implements PaymentService {
     }
 
     /**
-     * @param paymentDtoMono
+     * @param paymentDto
      * @return save payment.
      */
     @Override
-    public Mono<PaymentDto> savePayment(final Mono<PaymentDto> paymentDtoMono) {
-        return paymentDtoMono.map(AppUtil::dtoToEntities)
+    public Mono<PaymentDto> savePayment(final PaymentDto paymentDto) {
+        Payment payment;
+        payment = AppUtil.dtoToEntities(paymentDto);
+        return paymentDao.save(payment).map(AppUtil::entityToDto);
+        /*return paymentDto.map(AppUtil::dtoToEntities)
                 .flatMap(paymentDao::insert)
-                .map(AppUtil::entityToDto);
+                .map(AppUtil::entityToDto);*/
     }
 
     /**
