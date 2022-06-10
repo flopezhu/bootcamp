@@ -1,7 +1,9 @@
 #port
 server:
   port: 8085
-
+kafka:
+  topic:
+    name: payment-request
 #mongodb
 spring:
   data:
@@ -15,6 +17,11 @@ spring:
         locator:
           enabled: true
           lower-case-service-id: true
+  kafka:
+    bootstrap-servers: localhost:9092
+    producer:
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
 
 #eureka
 eureka:
